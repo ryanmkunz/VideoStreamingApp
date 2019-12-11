@@ -1,0 +1,42 @@
+﻿@model IEnumerable<RyanTube.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "ListUsers";
+}
+
+<h2>Users</h2>
+<table class="table">
+    <tr>        
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserRole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdminApproved)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserRole)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AdminApproved)
+    </td>
+    <td>
+        @Html.ActionLink("Approve", "ApproveUser", new { id = item.Id.ToString() }) |
+        @Html.ActionLink("Make Admin", "MakeAdmin", new { id = item.Id.ToString() }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,60 @@
+﻿@model RyanTube.Models.Video
+@{
+    ViewBag.Title = "Watch";
+}
+
+<h2>
+    @Html.DisplayFor(model => model.Title)
+</h2>
+
+<video id="video" class="dtm-video-element" preload="auto" width="1170" height="490" controls autoplay>
+    <source src="@Url.Content(Model.Url)" type="video/mp4" />
+</video>
+
+<h3>
+    @Html.DisplayFor(model => model.Description)
+</h3>
+
+<h4>Tagged Users</h4>
+
+<div>
+    @Html.ActionLink("Tag User", "CreateUserTag", "UserTags", new { VideoId = Model.Id }, null)
+</div>
+
+<table class="table">
+    @foreach (var item in Model.UserTags)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td align="right">
+                @Html.ActionLink("Edit", "EditUserTag", "UserTags", new { id = item.Id }, null) |             
+                @Html.ActionLink("Delete", "DeleteUserTag", "UserTags", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+</table>
+
+<h4>Comments</h4>
+<div>
+    @Html.ActionLink("Add comment", "CreateComment", "Comments", new { VideoId = Model.Id }, null)
+</div>
+
+<table class="table">
+    @foreach (var item in Model.Comments)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td align="right">
+                @Html.ActionLink("Edit", "EditComment", "Comments", new { id = item.Id }, null) |             
+                @Html.ActionLink("Delete", "DeleteComment", "Comments", new { id = item.Id}, null)
+            </td>
+        </tr>
+    }
+</table>

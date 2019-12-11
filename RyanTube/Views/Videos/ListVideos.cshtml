@@ -1,0 +1,34 @@
+﻿@model IEnumerable<RyanTube.Models.Video>
+
+@{
+    ViewBag.Title = "Videos";
+}
+<br />
+<div id="grid">
+   @foreach (var item in Model)
+    {
+    <div class="card" style="width:280px">
+       @if (item.Thumbnail != null)
+        {
+            <a href='@Url.Action("Watch", "Videos", new { id = item.Id }, null)'>
+                <img class="card-img-top" src='@Url.Content(item.Thumbnail)' style="width:280px" />
+            </a>
+        }
+        else
+        {
+            <p>
+                @Html.ActionLink("Thumbnail Placeholder", "Watch", "Videos", new { id = item.Id }, null)
+            </p>
+        }
+        <div class="card-body">
+            <h4 class="card-title">                
+                @Html.DisplayFor(modelItem => item.Title)
+            </h4>
+                        
+            <h6>
+                @Html.DisplayFor(modelItem => item.LastUpdated)
+            </h6>
+        </div>
+    </div>
+    }
+</div>

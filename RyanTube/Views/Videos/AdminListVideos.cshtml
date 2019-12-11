@@ -1,0 +1,29 @@
+﻿@model IEnumerable<RyanTube.Models.Video>
+
+@{
+    ViewBag.Title = "AdminListVideos";
+}
+
+<h2>Videos (Admin View)</h2>
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Play", "Watch", item, null)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { FileName = item.FileName }, null)
+            </td>
+        </tr>
+    }
+
+</table>
